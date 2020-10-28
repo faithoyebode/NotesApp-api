@@ -5,7 +5,9 @@ const Note = require("./models/note");
 const  schema  = require("./schema");
 const cors = require("cors");
 const app = express();
+require('dotenv').config();
 const PORT = process.env.PORT || 4300;
+
 
 app.use(cors());
 
@@ -19,7 +21,7 @@ app.use("/graphql",
                 graphiql: true
             })
         );
-mongoose.connect("mongodb+srv://faith:oyetunji123@cluster1.b3umu.mongodb.net/note-taking?w=majority", {useNewUrlParser: true, useUnifiedTopology: true}).then((result) => {
+mongoose.connect(process.env.CONN_URL, {useNewUrlParser: true, useUnifiedTopology: true}).then((result) => {
 
     console.log("Database Connected");
     app.listen(PORT, ()=>{console.log(`Server is listening on PORT ${PORT}`);});
